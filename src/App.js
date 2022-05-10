@@ -1,23 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+import BoxGenerator from './components/BoxGenerator';
+import Form from './components/Form';
+import {useState} from 'react';
+
 
 function App() {
+
+  const [boxColors, setBoxColors] = useState([
+    {color:"red", size: 100}, {color:"blue", size: 100}, {color:"purple", size: 100}
+  ]);
+  
+  const addBox = (newBox) => {
+    
+    console.log(newBox);
+    // make a copy of of the objects
+    const copyBox = [...boxColors]
+    // console.log(copyBox);
+    copyBox.push(newBox);
+    setBoxColors(copyBox);
+  }
+
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {JSON.stringify(boxColors)}
+      <hr />
+      <Form addBox = {addBox}/>
+      <BoxGenerator boxes = {boxColors}/>
     </div>
   );
 }
